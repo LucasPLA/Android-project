@@ -8,22 +8,9 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-
-        <LinearLayout
+        <ListView
+            android:id="@+id/list_dish"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/edit_dish_row"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Button" />
-            <TextView
-                android:id="@+id/dish_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="title"
-                />
-        </LinearLayout>
+            android:layout_height="match_parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
