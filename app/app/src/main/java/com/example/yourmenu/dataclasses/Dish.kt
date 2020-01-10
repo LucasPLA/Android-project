@@ -1,3 +1,11 @@
 package com.example.yourmenu.dataclasses
 
-data class Dish(var name: String, var appreciation: Int, var Difficulty: Int)
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class Dish(
+    @PrimaryKey var name: String,
+    var appreciation: Int,
+    var Difficulty: Int
+)

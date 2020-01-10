@@ -1,15 +1,21 @@
-package com.example.yourmenu
+package com.example.yourmenu.dishList
 
 import android.os.Bundle
 import android.view.*
 import android.widget.*
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.example.yourmenu.R
+import com.example.yourmenu.database.ViewModel
 import com.example.yourmenu.dataclasses.Dish
 
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: ViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -23,15 +29,24 @@ class MainActivity : AppCompatActivity() {
         registerForContextMenu(dishTitle) // Indicate that this View can display a ContextMenu
          */
 
-        fab.setOnClickListener { view ->
+        /*fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
+        }*/
+        fab.setOnClickListener {
+            viewModel.insertDish(Dish("cereales lyon", 9, 0))
         }
 
+
         val dishListNames = arrayOf("mamaliga", "spinachs", "pizza");
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 , dishListNames)
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dishListNames)
         val listView: ListView = findViewById(R.id.list_dish)
         listView.adapter = adapter
+
+        viewModel = ViewModelProvider(this).get(ViewModel::class.java)
+        viewModel.allDishes.observe(this, Observer { dish ->
+            dish?.let { it.forEach {item -> adapter.add(item.name)} }
+        })
     }
 
     // function called when the ContextMenu is called
