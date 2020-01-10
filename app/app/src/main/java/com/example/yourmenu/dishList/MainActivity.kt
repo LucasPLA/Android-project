@@ -1,6 +1,7 @@
 package com.example.yourmenu.dishList
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.*
 import com.google.android.material.snackbar.Snackbar
@@ -35,17 +36,18 @@ class MainActivity : AppCompatActivity() {
         }*/
         fab.setOnClickListener {
             viewModel.insertDish(Dish("cereales lyon", 9, 0))
+            Log.d("debug", "kermit")
         }
 
 
-        val dishListNames = arrayOf("mamaliga", "spinachs", "pizza");
+        val dishListNames = arrayOf("mamaliga", "spinachs", "pizza").toMutableList()
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dishListNames)
         val listView: ListView = findViewById(R.id.list_dish)
         listView.adapter = adapter
 
         viewModel = ViewModelProvider(this).get(ViewModel::class.java)
         viewModel.allDishes.observe(this, Observer { dish ->
-            dish?.let { it.forEach {item -> adapter.add(item.name)} }
+            dish?.let { it.forEach {item -> Log.d("debug", item.name); adapter.add(item.name)} } //adapter.add(item.name)
         })
     }
 
