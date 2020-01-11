@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.*
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -30,24 +29,18 @@ class MainActivity : AppCompatActivity() {
         registerForContextMenu(dishTitle) // Indicate that this View can display a ContextMenu
          */
 
-        /*fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }*/
         fab.setOnClickListener {
             viewModel.insertDish(Dish("cereales lyon", 9, 0))
             Log.d("debug", "kermit")
         }
 
-
-        val dishListNames = arrayOf("mamaliga", "spinachs", "pizza").toMutableList()
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dishListNames)
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
         val listView: ListView = findViewById(R.id.list_dish)
         listView.adapter = adapter
 
         viewModel = ViewModelProvider(this).get(ViewModel::class.java)
-        viewModel.allDishes.observe(this, Observer { dish ->
-            dish?.let { it.forEach {item -> Log.d("debug", item.name); adapter.add(item.name)} } //adapter.add(item.name)
+        viewModel.localDishes.observe(this, Observer { dish ->
+            dish?.let { it.forEach {item -> Log.d("debug", item.name); adapter.add(item.name)} }
         })
     }
 
