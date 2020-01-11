@@ -46,6 +46,7 @@ class ViewModel(application: Application): AndroidViewModel(application) {
 
                 override fun onResponse(call: Call<List<Dish>>, response: Response<List<Dish>>) {
                     remoteDishes.value = response.body()
+                    Log.e("network request", response.body().toString())
                 }
             }
         )
