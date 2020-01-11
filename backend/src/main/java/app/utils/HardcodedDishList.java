@@ -11,11 +11,11 @@ public class HardcodedDishList {
 
     private HardcodedDishList() {
         this.dishes = new Dish[]{
-                new Dish("Chili con carne", new String[]{"meat", "rice", "beans"}),
-                new Dish("mached carrots", new String[]{"carrots", "butter"}),
-                new Dish("spinach tort", new String[]{"spinach", "eggs", "cream", "pie pastry"}),
-                new Dish("onion soup", new String[]{"onions", "flour", "gruyere", "oil"}),
-                new Dish("mamaliga", new String[]{"mamaliga"})
+                new Dish("Chili con carne", 4, 2),
+                new Dish("mached carrots", 2, 1),
+                new Dish("spinach tort",  3, 3),
+                new Dish("onion soup", 3, 3),
+                new Dish("mamaliga", 3, 1)
         };
     }
 

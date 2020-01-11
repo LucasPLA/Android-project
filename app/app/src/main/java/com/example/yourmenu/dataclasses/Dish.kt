@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class Dish(
     @PrimaryKey var name: String,
     var appreciation: Int,
-    var Difficulty: Int
+    var difficulty: Int
 )

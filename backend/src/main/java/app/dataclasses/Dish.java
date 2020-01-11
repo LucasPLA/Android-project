@@ -1,18 +1,17 @@
 package app.dataclasses;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class Dish {
 
     private String name;
-    private List<String> ingredients;
+    private int appreciation;
+    private int difficulty;
 
-    public Dish(String name, String[] ingredients) {
+    public Dish(String name, int appreciation, int difficulty) {
         this.name = name;
-        this.ingredients = new ArrayList<String>(Arrays.asList(ingredients));
+        this.appreciation = appreciation;
+        this.difficulty = difficulty;
     }
 
     public String getName() {
@@ -23,12 +22,20 @@ public class Dish {
         this.name = name;
     }
 
-    public List<String> getIngredients() {
-        return ingredients;
+    public int getAppreciation() {
+        return appreciation;
     }
 
-    public void setIngredients(List<String> ingredients) {
-        this.ingredients = ingredients;
+    public void setAppreciation(int appreciation) {
+        this.appreciation = appreciation;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
     }
 
     @Override
@@ -36,12 +43,13 @@ public class Dish {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dish dish = (Dish) o;
-        return Objects.equals(name, dish.name) &&
-                Objects.equals(ingredients, dish.ingredients);
+        return appreciation == dish.appreciation &&
+                difficulty == dish.difficulty &&
+                name.equals(dish.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, ingredients);
+        return Objects.hash(name, appreciation, difficulty);
     }
 }
