@@ -15,4 +15,7 @@ interface DAO {
 
     @Query("SELECT * FROM Dish")
     fun getAllDishes(): LiveData<List<Dish>>
+
+    @Query("DELETE FROM Dish")
+    suspend fun nukeTable()
 }

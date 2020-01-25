@@ -13,6 +13,7 @@ class Repository(private val dao: DAO) {
 
     val allDishes: LiveData<List<Dish>> = dao.getAllDishes()
     suspend fun insertDish(dish: Dish) { dao.insertDish(dish)}
+    suspend fun nukeTable() { dao.nukeTable()}
 }
 
 private val moshi = Moshi.Builder()
@@ -21,11 +22,11 @@ private val moshi = Moshi.Builder()
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
-    .baseUrl("http://localhost:8080/") // TODO : passer la valeur dans les values
+    .baseUrl("http://10.0.2.2:8080/") // TODO : put this value in a utils file
     .build()
 
 interface ApiService {
-    @GET("getDishes")
+    @GET("/getDishes")
     fun getRemoteDishes():
             Call<List<Dish>>
 }

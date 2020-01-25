@@ -29,11 +29,15 @@ class ViewModel(application: Application): AndroidViewModel(application) {
         localDishes = repository.allDishes
 
         // Remote dishes are loaded only at start-up //TODO: call remote dishes on adding new dish
-        // requestNetworkDishes()
+        requestNetworkDishes()
     }
 
     fun insertDish(dish: Dish) = viewModelScope.launch {
         repository.insertDish(dish)
+    }
+
+    fun nukeTable() = viewModelScope.launch {
+        repository.nukeTable()
     }
 
     private fun requestNetworkDishes() {
@@ -41,12 +45,10 @@ class ViewModel(application: Application): AndroidViewModel(application) {
             object: Callback<List<Dish>> {
                 override fun onFailure(call: Call<List<Dish>>, t: Throwable) {
                     remoteDishes.value = null // TODO: make it clean
-                    Log.e("network request", t.message)
                 }
 
                 override fun onResponse(call: Call<List<Dish>>, response: Response<List<Dish>>) {
                     remoteDishes.value = response.body()
-                    Log.e("network request", response.body().toString())
                 }
             }
         )
